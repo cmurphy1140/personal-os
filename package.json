@@ -1,0 +1,32 @@
+{
+  "name": "personal-os",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test:ui": "node scripts/verify-ui.mjs",
+    "validate:destinations": "node scripts/verify-destinations.mjs",
+    "validate:images": "bash scripts/validate-images.sh .",
+    "validate:privacy": "node scripts/verify-public-output.mjs",
+    "verify": "npm run validate:destinations && npm run lint && npm run build && npm run validate:privacy && npm run validate:images"
+  },
+  "dependencies": {
+    "next": "16.3.5",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.5",
+    "playwright-core": "^1.63.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
