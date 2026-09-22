@@ -58,6 +58,62 @@ export const destinations = [
     verified: true,
   },
   {
+    slug: "mac-hardening",
+    title: "Mac Hardening and Automation",
+    shortTitle: "Mac Hardening",
+    kind: "case-study",
+    href: "/work/mac-hardening",
+    summary:
+      "Audited and cleaned a macOS system end to end, then scripted its weekly maintenance.",
+    status: "Complete, 2026",
+    evidence: [
+      "Removed 34 orphaned launch items left behind by uninstalled software.",
+      "Migrated Homebrew to its native arm64 install.",
+      "Reclaimed 89 GiB of storage.",
+      "Scripted weekly maintenance with launchd.",
+    ],
+    learning:
+      "Cleaning up a machine starts with measuring it: I inventoried every startup item and gigabyte before removing anything, so each change could be explained and undone.",
+    verified: true,
+  },
+  {
+    slug: "band-charter-outreach",
+    title: "Customer Outreach Pipeline",
+    shortTitle: "Outreach Pipeline",
+    kind: "case-study",
+    href: "/work/band-charter-outreach",
+    summary:
+      "Built a PostgreSQL lead pipeline for a band travel charter client.",
+    status: "2025",
+    evidence: [
+      "Filtered East Coast schools to traveling band programs, with music-department contacts found through parameter testing.",
+      "Chained queries into soft-lead scoring and templated email generation.",
+      "Built with Python, PostgreSQL, and SQL.",
+    ],
+    learning:
+      "Turning a manual outreach list into a scored, queryable pipeline made it possible to prioritize leads and generate templated contact instead of working the list by hand.",
+    verified: false,
+  },
+  {
+    slug: "catch-5",
+    title: "Catch 5 — iOS Card Game and Learning App",
+    shortTitle: "Catch 5",
+    kind: "case-study",
+    href: "/work/catch-5",
+    summary:
+      "Developing a Swift/SwiftUI app for playing and learning Catch 5, with a standalone rules engine, computer opponents, interactive tutorials, strategy explanations, and save/resume functionality.",
+    status: "In development",
+    evidence: [
+      "Standalone rules engine separated from the app UI.",
+      "Computer opponents for solo play.",
+      "Interactive tutorials and strategy explanations for learning the game.",
+      "Save/resume functionality.",
+    ],
+    learning:
+      "Separating the rules engine from the interface let the same game logic drive both play and the interactive tutorials, instead of duplicating rules in each.",
+    verified: false,
+  },
+  {
     slug: "resume",
     title: "Resume",
     shortTitle: "Resume",
