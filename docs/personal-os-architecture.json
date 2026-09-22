@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Personal OS Workbench Architecture",
+    "quality_profile": "showcase",
+    "viewBox": [1160, 520],
+    "views": [
+      {
+        "id": "visitor-flow",
+        "label": "Terminal Navigation & Resolution",
+        "focus": ["visitor", "terminal-ui", "command-engine", "destinations", "vercel-edge"],
+        "note": "Trace how visitor keystrokes and clicks resolve against the closed destination manifest and render views."
+      },
+      {
+        "id": "privacy-verification",
+        "label": "Privacy Gate & Verification Pipeline",
+        "focus": ["command-engine", "privacy-guard", "verify-suite", "pdf-asset"],
+        "note": "Examine automated pre-deployment checks that verify route targets and quarantine private credentials."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "visitor",
+      "type": "external",
+      "label": "Portfolio Visitor",
+      "sublabel": "Terminal keystrokes & clicks",
+      "pos": [40, 210],
+      "size": [150, 64]
+    },
+    {
+      "id": "terminal-ui",
+      "type": "frontend",
+      "label": "Terminal Workbench",
+      "sublabel": "Next.js UI & prompt emulator",
+      "pos": [250, 210],
+      "size": [160, 64]
+    },
+    {
+      "id": "command-engine",
+      "type": "backend",
+      "label": "Command Dispatcher",
+      "sublabel": "Closed static allowlist",
+      "pos": [480, 210],
+      "size": [160, 64]
+    },
+    {
+      "id": "destinations",
+      "type": "database",
+      "label": "Destination Registry",
+      "sublabel": "Manifest & verified views",
+      "pos": [480, 50],
+      "size": [160, 64]
+    },
+    {
+      "id": "privacy-guard",
+      "type": "security",
+      "label": "Privacy Gatekeeper",
+      "sublabel": "Token & local path auditor",
+      "pos": [480, 370],
+      "size": [160, 64]
+    },
+    {
+      "id": "verify-suite",
+      "type": "backend",
+      "label": "Verification Rig",
+      "sublabel": "verify-ui & destinations",
+      "pos": [710, 210],
+      "size": [160, 64]
+    },
+    {
+      "id": "pdf-asset",
+      "type": "database",
+      "label": "Resume Artifact",
+      "sublabel": "Connor_Murphy_Resume.pdf",
+      "pos": [710, 370],
+      "size": [160, 64]
+    },
+    {
+      "id": "vercel-edge",
+      "type": "cloud",
+      "label": "Vercel Edge Host",
+      "sublabel": "Static export & global CDN",
+      "pos": [950, 210],
+      "size": [150, 64]
+    }
+  ],
+  "connections": [
+    {
+      "id": "visitor-to-ui",
+      "from": "visitor",
+      "to": "terminal-ui",
+      "label": "inputs",
+      "variant": "emphasis",
+      "labelDy": -14
+    },
+    {
+      "id": "ui-to-engine",
+      "from": "terminal-ui",
+      "to": "command-engine",
+      "label": "tokens",
+      "variant": "emphasis",
+      "labelDy": -14
+    },
+    {
+      "id": "engine-to-dest",
+      "from": "command-engine",
+      "to": "destinations",
+      "label": "resolves route",
+      "fromSide": "top",
+      "toSide": "bottom",
+      "labelAt": [560, 162]
+    },
+    {
+      "id": "engine-to-privacy",
+      "from": "command-engine",
+      "to": "privacy-guard",
+      "label": "audits bounds",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [560, 322]
+    },
+    {
+      "id": "engine-to-verify",
+      "from": "command-engine",
+      "to": "verify-suite",
+      "label": "validates",
+      "labelDy": -14
+    },
+    {
+      "id": "verify-to-pdf",
+      "from": "verify-suite",
+      "to": "pdf-asset",
+      "label": "verifies link",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [790, 322]
+    },
+    {
+      "id": "verify-to-vercel",
+      "from": "verify-suite",
+      "to": "vercel-edge",
+      "label": "deploys",
+      "variant": "emphasis",
+      "labelDy": -14
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Closed Static Navigator",
+      "items": [
+        "Terminal input is not connected to a shell; commands resolve against an explicit, immutable allowlist",
+        "Clickable UI elements and terminal commands share a single verified destination manifest"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Automated Privacy Boundary",
+      "items": [
+        "Verification scripts fail builds if private house network details or local filesystem paths appear",
+        "Guarantees total isolation between public showcase views and sensitive local research archives"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Deterministic Test Coverage",
+      "items": [
+        "End-to-end UI tests validate mobile/desktop viewports, 404 handling, and resume PDF integrity",
+        "Optimized Next.js static output deploys globally via Vercel Edge with zero runtime server latency"
+      ]
+    }
+  ]
+}
