@@ -30,13 +30,9 @@ async function checkViewport(name, viewport) {
     await page.waitForURL(`${baseUrl}/work/itinerary-control`);
 
     await page.goto(baseUrl, { waitUntil: "networkidle" });
-    await page.route("https://github.com/cmurphy1140/Vero", (route) =>
-      route.fulfill({ status: 200, contentType: "text/html", body: "verified Vero destination" }),
-    );
     await page.getByLabel("Portfolio command").fill("open vero");
     await page.getByLabel("Portfolio command").press("Enter");
-    await page.waitForURL("https://github.com/cmurphy1140/Vero");
-    await page.unroute("https://github.com/cmurphy1140/Vero");
+    await page.waitForURL(`${baseUrl}/work/vero`);
   }
 
   for (const route of ["/work/vero", "/work/itinerary-control", "/resume"]) {

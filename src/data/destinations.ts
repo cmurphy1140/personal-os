@@ -26,7 +26,7 @@ export const destinations = [
     title: "Vero — System Assurance Field Study",
     shortTitle: "Vero",
     kind: "case-study",
-    href: "https://github.com/cmurphy1140/Vero",
+    href: "/work/vero",
     summary:
       "A safety-bounded reverse-engineering study of a professionally installed home automation system.",
     status: "Active field study",
