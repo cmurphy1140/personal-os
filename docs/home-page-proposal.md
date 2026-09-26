@@ -185,3 +185,11 @@ default-selected project) to:
 No client names appear anywhere above; the existing manifest already keeps
 `band-charter-outreach`'s wording client-free, and this proposal doesn't
 change that.
+
+## Second opinion (Codex, read-only review)
+
+1. Put the identity line, the CS degree, the target roles ("Entry-level Software Engineering / IT Support") and the résumé link above both panes, so a desktop reader meets the qualifications before the terminal.
+2. For Vero, replace the method bullets with one plain-language outcome, the technologies, and one approved number; the strongest evidence currently sits only in this proposal's rationale.
+3. For the IT-support applications, move Mac Hardening ahead of tracker-digest and label it "IT Support & Automation".
+
+Pushback worth taking: the proposed first line says "ships … iOS apps", but Catch 5 is still in development. Use "developing an iOS app" until one ships.
