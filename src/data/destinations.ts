@@ -144,6 +144,25 @@ export const destinations = [
     primary: false,
   },
   {
+    slug: "timeline",
+    title: "Timeline — work, projects and education by date",
+    shortTitle: "Timeline",
+    kind: "artifact",
+    href: "/timeline",
+    summary:
+      "Every dated entry from the verified resume on one axis, from the senior capstone in 2021 to the work in progress now.",
+    status: "Dated from the verified resume",
+    evidence: [
+      "Each entry keeps the resume's own precision: a month where the resume gives a month, a whole year where it gives only a year.",
+      "Projects on the timeline link to their case study only when that destination is verified.",
+      "The same record prints in the terminal as cat experience.",
+    ],
+    learning:
+      "Drawing the record to scale meant keeping each date exactly as precise as its source. Widening an entry to look tidier would be a claim the resume does not make.",
+    verified: true,
+    primary: true,
+  },
+  {
     slug: "resume",
     title: "Resume",
     shortTitle: "Resume",
