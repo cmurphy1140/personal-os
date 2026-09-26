@@ -2,8 +2,8 @@
 
 ## Product
 
-A public, resume-grade portfolio that keeps the Vero probe console's terminal
-layout while turning the terminal into a truthful navigator for Connor's work.
+A public, resume-grade portfolio that leads with who Connor is and his work,
+with a truthful terminal navigator one keystroke away.
 It is not an exposed shell and does not connect to Connor's computer.
 
 ## Interaction Contract
@@ -27,60 +27,70 @@ Closed command set:
 Every destination declares one kind: `repo`, `deploy`, `artifact`, or
 `case-study`. No destination is shown as available until its target is verified.
 
-## Visual Plan
+## Visual Plan — "A Different Road" (shipped 2026-09-26)
+
+Built on Connor's line: "I walk a different road, and it's the only road I
+want to be on." Replaces the earlier split-plane terminal-first layout.
 
 ### Color
 
-- `ground` — `#000000`
-- `surface` — `#0c0c0d`
-- `surface-raised` — `#141416`
-- `ink` — `#f4f4f4`
-- `sage` — `#7fae83`
-- `amber` — `#d9a95c`
-- `signal` — `#4dffb0`
+Dark (default) and light are token swaps in `src/app/globals.css`.
 
-These tokens deliberately preserve the source console's visual grammar. The
-brief specifically calls for continuity, so the near-black and green pairing is
-not being chosen as generic developer styling.
+| Token | Dark | Light | Use |
+|---|---|---|---|
+| `ground` | `#0b0b0c` | `#f4f2ed` | page, with a faint grain |
+| `surface` | `#121214` | `#fbfaf7` | cards, terminal |
+| `ink` / `ink-soft` / `ink-faint` | `#f3f1ec` / `#b3b0a9` / `#94918b` | `#18181a` / `#45443f` / `#5d5b55` | text tiers, each ≥ 4.5:1 |
+| `amber` | `#d9a95c` | `#8a5c12` | the one accent: road paint, focus, primary button |
+| `sage` | `#8dbb91` | `#3d7a4e` | terminal success output only |
+| `asphalt` / `paint` | `#1c1c1f` / `#d9a95c` | `#26262a` / `#d9a95c` | the road, dark in both themes |
+
+The motif is the dashed amber centre line: section dividers, the terminal
+toggles' dashed focus ring, the road. Nothing else is decorated.
 
 ### Type
 
-- Human narrative: SF Pro Display with system fallbacks.
-- Commands and evidence: SF Mono with system fallbacks.
-- Headlines are light, left-aligned, and restrained; terminal output stays dense
-  enough to feel operational without sacrificing readability.
+- Geist Sans (via `next/font/google`) for the name, bio, titles and prose.
+- Geist Mono for labels, mile markers, tags and the terminal.
+- The name is the only h1 on home; the bio is a large muted sentence with the
+  key words bright.
 
 ### Layout
 
 Desktop:
 
 ```text
-┌ Connor Murphy / Personal OS ───────── resume  theme ┐
-│                                                     │
-│ terminal session             selected work          │
-│ ┌─────────────────────────┐ ┌────────────────────┐  │
-│ │ boot / prompt / output  │ │ story              │  │
-│ │                         │ │ evidence            │  │
-│ │ connor@work ~ $         │ │ real destination   │  │
-│ └─────────────────────────┘ └────────────────────┘  │
-│ verified destinations · last exit 0                 │
-└─────────────────────────────────────────────────────┘
+┌ -- Connor Murphy        Timeline Résumé [Jump to ⌘K] [>_] [◐] ┐
+│ SOFTWARE ENGINEER · B.S. COMPUTER SCIENCE                     │
+│ Connor Murphy                                                 │
+│ bio sentence, key words bright                                │
+│ ┆ I walk a different road, and it's the only road …           │
+│ [Download résumé] [See the work]                              │
+│ — — — — — — — — — — — — — — — — — — — — — — — — — — — — —     │
+│ Selected work   ┌ MILE 01 · … ┐ ┌ MILE 02 · … ┐               │
+│                 └─────────────┘ └─────────────┘  (2 columns)  │
+│ — — — — — — — — — — — — — — — — — — — — — — — — — — — — —     │
+│ The road so far   stops above and below one road, in order    │
+└───────────────────────────────────────────────────────────────┘
 ```
 
-Mobile:
+Mobile: the same order in one column; the road runs down the left edge; the
+header keeps Résumé, `>_` and the theme toggle.
 
-```text
-┌ Personal OS ─ resume ┐
-│ selected work        │
-│ evidence + open      │
-├──────────────────────┤
-│ terminal session     │
-│ connor@work ~ $      │
-└──────────────────────┘
-```
+The terminal is a modal `<dialog>` opened by ⌘K (or Ctrl-K), the ⌘K pill,
+the `>_` button or the footer link: a palette on desktop, a sheet from the
+bottom on a phone. Escape or a click outside closes it.
 
-The selected work pane comes first on narrow screens so a recruiter can use the
-site without learning the terminal. Commands remain fully available below it.
+### Projects and the road
+
+- Cards come from `src/data/destinations.ts` (primary case studies, in
+  order). The label is the mile number, the entry's `category` and its first
+  `tag`; tags only name tools the entry's own evidence states.
+- A verified card is a link whose plain click runs `open <slug>` through the
+  command engine. An unverified card (Catch 5) shows its status badge and is
+  not linked, matching `open`'s refusal.
+- The road draws every entry of `src/data/timeline.ts`, evenly spaced and in
+  start order, with dates exactly as stated. `/timeline` draws it to scale.
 
 ## Content Shape
 

@@ -23,20 +23,29 @@ case study. Arbitrary commands, paths, and URLs must fail closed.
 
 ## Aesthetic North Star
 
-An engineer's workbench shown with the composure of a flight recorder: black
-ground, quiet instrument panels, precise status language, and one honest terminal
-prompt. It should feel intimate because Connor's reasoning, corrections, and
-learning are visible—not because the interface imitates a hacker movie.
+"A Different Road", built on Connor's line: "I walk a different road, and it's
+the only road I want to be on." A recruiter should know who Connor is and see
+his best work within five seconds; the terminal is there for anyone who wants
+it, not in the way of anyone who doesn't.
 
-- Preserve Vero's disciplined shell grammar and semantic token palette.
-- Use SF Pro Display/system sans for human narrative and SF Mono/system mono for
-  commands, states, and evidence.
-- Spend visual emphasis on the command-and-result interaction. Avoid decorative
-  dashboards, generic card grids, gradients, fake telemetry, and Matrix effects.
-- Mobile visitors must be able to reach everything by ordinary taps. Typed
-  commands and clickable controls operate the same router.
-- Respect reduced motion, visible keyboard focus, semantic HTML, and readable
-  line lengths.
+- Night road: near-black asphalt ground with a faint grain, and one warm
+  accent (amber `#d9a95c`, darkened in the light theme for contrast) used the
+  way road paint is used. Sage is for success states in the terminal only.
+- One motif, used sparingly: the dashed amber centre line (section dividers,
+  the terminal toggles' focus ring, the road itself). No gradients, fake
+  telemetry or decorative clutter.
+- Home order: the name, the bio as a large muted sentence with the key words
+  bright, Connor's line as the tagline, a résumé button sized to its label;
+  then mile-marker project cards ("MILE 01 · TOOL · PYTHON"); then the road,
+  drawn only from `src/data/timeline.ts` (across on wide screens, down on a
+  phone) and linked to `/timeline`, which draws the same record to scale.
+- Geist Sans for narrative and titles, Geist Mono for labels and the terminal.
+- The terminal lives behind "Jump to ⌘K" and a `>_` button as a modal dialog
+  (a sheet on a phone). Card taps and typed commands run the same router; an
+  unverified project is shown with its state and is not linked.
+- Mobile visitors reach everything by ordinary taps. Respect reduced motion,
+  visible keyboard focus, semantic HTML, light and dark themes, readable line
+  lengths, and no horizontal scroll at 390px.
 
 ## Public Boundary
 
@@ -60,6 +69,9 @@ approved public Vero material only.
   completion claim.
 
 ## Current Status
+
+2026-09-26: the "A Different Road" redesign replaced the split-plane layout
+(see Aesthetic North Star and docs/design.md).
 
 2026-09-20: the split-plane Personal OS Shell, closed command engine, typed
 destination manifest, internal case-study and resume routes, public-output
