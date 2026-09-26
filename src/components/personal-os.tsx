@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, KeyboardEvent, useEffect, useMemo, useRef, useState } from "react";
-import { destinations } from "@/data/destinations";
 import { boot, completions, run, verifiedCount } from "@/components/shell";
+import Road from "@/components/road";
 import SiteHeader from "@/components/site-header";
 import TerminalPanel, { type TranscriptBlock } from "@/components/terminal-panel";
 import WorkPane from "@/components/work-pane";
 
+/* The one controller. Card taps, listing taps and typed commands all go
+   through execute(), which is the only caller of the command engine. */
 export default function PersonalOS() {
   const router = useRouter();
   const initial = useMemo(() => boot(), []);
@@ -17,11 +19,10 @@ export default function PersonalOS() {
   const [history, setHistory] = useState<string[]>([]);
   const [historyAt, setHistoryAt] = useState(0);
   const [input, setInput] = useState("");
-  const [selectedSlug, setSelectedSlug] = useState("vero");
   const [lastExit, setLastExit] = useState(0);
+  const [terminalOpen, setTerminalOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const sessionRef = useRef<HTMLDivElement>(null);
-  const selected = destinations.find((item) => item.slug === selectedSlug) ?? destinations[0];
 
   const execute = (raw: string) => {
     const command = raw.trim();
@@ -33,7 +34,6 @@ export default function PersonalOS() {
     setInput("");
     setCwd(result.cwd);
     setLastExit(result.exit);
-    if (result.select) setSelectedSlug(result.select);
     if (result.clear) {
       const fresh = boot();
       setBlocks([{ id: Date.now(), cwd: fresh.cwd, lines: fresh.lines }]);
@@ -48,6 +48,17 @@ export default function PersonalOS() {
   useEffect(() => {
     sessionRef.current?.scrollTo({ top: sessionRef.current.scrollHeight, behavior: "smooth" });
   }, [blocks]);
+
+  useEffect(() => {
+    const onGlobalKey = (event: globalThis.KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        setTerminalOpen((open) => !open);
+      }
+    };
+    window.addEventListener("keydown", onGlobalKey);
+    return () => window.removeEventListener("keydown", onGlobalKey);
+  }, []);
 
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -77,23 +88,58 @@ export default function PersonalOS() {
     }
   };
 
+  const openTerminal = () => setTerminalOpen(true);
+
   return (
     <div className="frame">
-      <a className="skip-link" href="#selected-work-title">Skip to selected work</a>
-      <SiteHeader />
-      <section className="identity" aria-label="About Connor Murphy">
-        <p className="identity-kicker">Connor Murphy · Software Engineer</p>
-        <p className="identity-heading">B.S. Computer Science, University of New Hampshire</p>
-        <p className="identity-line">Targeting entry-level software engineering and IT support roles. Ships backend pipelines and databases; developing an iOS app.</p>
-        <Link className="chip identity-actions" href="/resume">résumé</Link>
-      </section>
-      <main className="planes">
-        <WorkPane selected={selected} execute={execute} />
-        <TerminalPanel blocks={blocks} cwd={cwd} input={input} setInput={setInput} execute={execute} onSubmit={onSubmit} onKeyDown={onKeyDown} inputRef={inputRef} sessionRef={sessionRef} />
+      <a className="skip-link" href="#work">Skip to selected work</a>
+      <SiteHeader onTerminal={openTerminal} terminalOpen={terminalOpen} />
+      <main>
+        <section className="hero" aria-labelledby="hero-title">
+          <p className="section-kicker">Software engineer · B.S. Computer Science</p>
+          <h1 className="hero-name" id="hero-title">Connor Murphy</h1>
+          <p className="hero-bio">
+            A computer science graduate of the <strong>University of New Hampshire</strong>, looking for{" "}
+            <strong>entry-level software engineering</strong> and <strong>IT support</strong> roles. I build backend
+            pipelines and databases: a <strong>home automation field study</strong>, a <strong>trip proposal tool</strong>,
+            a <strong>job-application digest</strong>, and an <strong>iOS card game</strong> still in development.
+          </p>
+          <blockquote className="hero-line">
+            <p>I walk a different road, and it&rsquo;s the only road I want to be on.</p>
+          </blockquote>
+          <div className="hero-actions">
+            <a className="button button--primary" href="/Connor_Murphy_Resume.pdf" download>Download résumé</a>
+            <a className="button" href="#work">See the work</a>
+          </div>
+        </section>
+        <hr className="centre-line" />
+        <WorkPane execute={execute} />
+        <hr className="centre-line" />
+        <Road />
       </main>
-      <footer className="status-bar" aria-label="Portfolio status">
-        <span className="status">{verifiedCount} verified destinations</span><span className="status">read-only manifest</span><span className={`status status--grow${lastExit ? " status--fail" : ""}`}>last exit {lastExit}</span>
+      <footer className="site-footer">
+        <p>Connor Murphy · <Link href="/resume">Résumé</Link> · <Link href="/timeline">Timeline</Link></p>
+        <p>
+          Prefer the keyboard?{" "}
+          <button className="text-button" type="button" aria-controls="terminal" aria-expanded={terminalOpen} onClick={openTerminal}>Open the portfolio terminal</button>{" "}
+          <kbd>⌘K</kbd>
+        </p>
       </footer>
+      <TerminalPanel
+        open={terminalOpen}
+        onClose={() => setTerminalOpen(false)}
+        blocks={blocks}
+        cwd={cwd}
+        input={input}
+        setInput={setInput}
+        execute={execute}
+        onSubmit={onSubmit}
+        onKeyDown={onKeyDown}
+        inputRef={inputRef}
+        sessionRef={sessionRef}
+        verifiedCount={verifiedCount}
+        lastExit={lastExit}
+      />
     </div>
   );
 }

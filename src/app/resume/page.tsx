@@ -1,18 +1,44 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import ThemeToggle from "@/components/theme-toggle";
+import SiteHeader from "@/components/site-header";
 import { destinations, findDestination } from "@/data/destinations";
+
+export const metadata: Metadata = {
+  title: "Résumé — Connor Murphy",
+  description: "Connor Murphy's one-page résumé and the project evidence behind it.",
+};
 
 export default function ResumePage() {
   const resume = findDestination("resume");
   const projects = destinations.filter((destination) => destination.kind === "case-study");
   return (
     <div className="frame">
-      <header className="app-bar"><Link className="brand" href="/"><span className="eyebrow">CONNOR MURPHY</span><span className="brand-title">PERSONAL OS</span></Link><div className="bar-actions"><ThemeToggle /></div></header>
+      <SiteHeader />
       <main className="doc">
-        <Link className="doc-back" href="/">← return to terminal</Link>
-        <header className="doc-head"><p className="work-kicker">resume · evidence index</p><h1 className="doc-title">Connor Murphy</h1><p className="doc-summary">{resume?.summary}</p></header>
-        <section className="doc-section"><h2>Current public version</h2><p>The one-page resume is an evidence-backed snapshot of systems work, employment, technical skills, and education.</p><div className="doc-index"><a href="/Connor_Murphy_Resume.pdf" download><strong>Download PDF resume</strong><span>One page · verified September 20, 2026</span></a></div></section>
-        <section className="doc-section"><h2>Selected systems work</h2><div className="doc-index">{projects.map((project) => <Link href={project.href} key={project.slug}><strong>{project.title}</strong><span>{project.status}</span></Link>)}</div></section>
+        <Link className="doc-back" href="/">← Home</Link>
+        <header className="doc-head">
+          <p className="card-label"><span>RÉSUMÉ · EVIDENCE INDEX</span></p>
+          <h1 className="doc-title">Connor Murphy</h1>
+          <p className="doc-summary">{resume?.summary}</p>
+          <div className="hero-actions"><a className="button button--primary" href="/Connor_Murphy_Resume.pdf" download>Download résumé</a></div>
+          <p className="doc-status">One page · PDF · verified September 20, 2026</p>
+        </header>
+        <hr className="centre-line" />
+        <section className="doc-section" aria-labelledby="projects-title">
+          <h2 id="projects-title">Selected systems work</h2>
+          {/* Only a verified destination is linked; the rest show their state. */}
+          <ul className="doc-index">
+            {projects.map((project) => (
+              <li key={project.slug}>
+                {project.verified ? (
+                  <Link href={project.href}><strong>{project.title}</strong><span>{project.status}</span></Link>
+                ) : (
+                  <div><strong>{project.title}</strong><span>{project.status} · case study not yet verified</span></div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
       </main>
     </div>
   );

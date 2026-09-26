@@ -21,6 +21,10 @@ export type Destination = {
   /* Shown in the work-picker tab row. false keeps a destination reachable
      through ls/cat/open without competing for the first tabs a visitor sees. */
   primary: boolean;
+  /* The mile-marker label on the home card: a plain category and the tools
+     the entry's own evidence names. Nothing here goes beyond that evidence. */
+  category?: string;
+  tags?: readonly string[];
 };
 
 export const destinations = [
@@ -42,6 +46,8 @@ export const destinations = [
       "A measuring tool is part of the evidence chain: subtle instrumentation errors create confident but incorrect conclusions.",
     verified: true,
     primary: true,
+    category: "Field study",
+    tags: ["Swift", "WebSockets", "182 tests"],
   },
   {
     slug: "itinerary-control",
@@ -62,6 +68,8 @@ export const destinations = [
       "Reading and writing the same trip record everywhere meant a fact fixed once showed up correctly in the proposal, the change summary, and the vendor list, instead of needing to be retyped into a second source for the Word document.",
     verified: true,
     primary: true,
+    category: "Tool",
+    tags: ["Word output", "239 tests"],
   },
   {
     slug: "tracker-digest",
@@ -81,6 +89,8 @@ export const destinations = [
       "A deliberate edge-case pass found that a blank line in the CSV shifted the reported line number for a bad row, because the code assumed row index plus two instead of asking the CSV reader for its own line count. A test that failed on the old code and passed on the fix pinned the correction.",
     verified: true,
     primary: true,
+    category: "Tool",
+    tags: ["Python", "Standard library", "CLI"],
   },
   {
     slug: "mac-hardening",
@@ -101,6 +111,8 @@ export const destinations = [
       "Cleaning up a machine starts with measuring it: I inventoried every startup item and gigabyte before removing anything, so each change could be explained and undone.",
     verified: true,
     primary: true,
+    category: "Systems",
+    tags: ["macOS", "launchd", "Homebrew"],
   },
   {
     slug: "catch-5",
@@ -121,6 +133,8 @@ export const destinations = [
       "Separating the rules engine from the interface let the same game logic drive both play and the interactive tutorials, instead of duplicating rules in each.",
     verified: false,
     primary: true,
+    category: "App",
+    tags: ["Swift", "SwiftUI"],
   },
   {
     slug: "band-charter-outreach",

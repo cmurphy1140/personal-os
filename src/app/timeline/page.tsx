@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
-import ThemeToggle from "@/components/theme-toggle";
+import SiteHeader from "@/components/site-header";
 import { findDestination } from "@/data/destinations";
 import {
   asOfValue,
@@ -19,7 +19,7 @@ import {
 
 export const metadata = {
   title: "Timeline — Connor Murphy",
-  description: "Work, projects and education by date, from Connor Murphy's verified resume.",
+  description: "Work, projects and education by date, from Connor Murphy's résumé.",
 };
 
 const years = Array.from(
@@ -58,13 +58,13 @@ function Bar({ entry, index }: { entry: TimelineEntry; index: number }) {
 export default function TimelinePage() {
   return (
     <div className="frame">
-      <header className="app-bar"><Link className="brand" href="/"><span className="eyebrow">CONNOR MURPHY</span><span className="brand-title">PERSONAL OS</span></Link><div className="bar-actions"><Link className="chip" href="/resume">resume</Link><ThemeToggle /></div></header>
+      <SiteHeader />
       <main className="doc doc--wide">
-        <Link className="doc-back" href="/">← return to terminal</Link>
+        <Link className="doc-back" href="/#road">← The road so far</Link>
         <header className="doc-head">
-          <p className="work-kicker">timeline · dated from the verified resume</p>
+          <p className="card-label"><span>TIMELINE · DATED FROM THE RÉSUMÉ</span></p>
           <h1 className="doc-title">Work, projects and education, to scale</h1>
-          <p className="doc-summary">Each entry keeps the precision the resume gives it. A month is drawn as a month; a year the resume states without a month is drawn as the whole year and hatched, so no date is sharper here than in the source.</p>
+          <p className="doc-summary">Each entry keeps the precision the résumé gives it. A month is drawn as a month; a year the résumé states without a month is drawn as the whole year and hatched, so no date is sharper here than in the source.</p>
         </header>
 
         <section className="doc-section tl" aria-labelledby="tl-axis-title" style={{ "--years": span } as CSSProperties}>
@@ -79,7 +79,7 @@ export default function TimelinePage() {
             const entries = timeline.filter((entry) => entry.lane === lane);
             return (
               <div className="tl-lane" key={lane}>
-                <h3 className="tl-lane-title"><span className="sigil">$</span> ls {lane}</h3>
+                <h3 className="tl-lane-title">{lane}</h3>
                 <ol className="tl-list">
                   {entries.map((entry) => {
                     const href = linkFor(entry);

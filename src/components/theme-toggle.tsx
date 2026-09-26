@@ -14,7 +14,7 @@ export default function ThemeToggle() {
   return (
     <button
       type="button"
-      className="chip chip--icon"
+      className="icon-button"
       aria-label="Toggle color theme"
       onClick={() => {
         const chosen = document.documentElement.dataset.theme;
