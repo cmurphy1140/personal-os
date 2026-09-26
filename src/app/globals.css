@@ -54,7 +54,7 @@
     --ink-soft: #464a49;
     --ink-faint: #5f6261;
     --clay: #a8453f;
-    --signal-wash: #dcf3e9;
+    --signal-wash: #ecfaf3;
 
     color-scheme: light;
   }
@@ -74,7 +74,7 @@
   --ink-soft: #464a49;
   --ink-faint: #5f6261;
   --clay: #a8453f;
-  --signal-wash: #dcf3e9;
+  --signal-wash: #ecfaf3;
 
   color-scheme: light;
 }
@@ -213,7 +213,7 @@ a {
 }
 
 .eyebrow {
-  font: 500 0.68rem/1.3 var(--sans);
+  font: 500 0.75rem/1.3 var(--sans);
   letter-spacing: 0.22em;
   color: var(--ink-faint);
 }
@@ -240,7 +240,7 @@ a {
   align-items: center;
   gap: 6px;
   white-space: nowrap;
-  font: 400 0.68rem/1 var(--mono);
+  font: 400 0.75rem/1 var(--mono);
   letter-spacing: 0.04em;
   color: var(--ink-soft);
   background: transparent;
@@ -257,6 +257,40 @@ a {
 
 .chip--icon {
   padding: 6px 9px;
+}
+
+/* ── identity ──────────────────────────────────────────────── */
+
+/* Sits above both panes on every viewport so a recruiter reads who Connor is
+   and what he's targeting before either the terminal or a project. */
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: var(--measure);
+  padding: 0 2px clamp(14px, 2.4vw, 20px);
+}
+
+.identity-kicker {
+  font: 400 0.75rem/1.4 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.identity-heading {
+  font-weight: 200;
+  font-size: clamp(1.1rem, 1rem + 0.6vw, 1.35rem);
+  letter-spacing: -0.01em;
+}
+
+.identity-line {
+  font: 400 0.86rem/1.6 var(--sans);
+  color: var(--ink-soft);
+}
+
+.identity-actions {
+  margin-top: 4px;
 }
 
 /* ── planes ────────────────────────────────────────────────── */
@@ -311,8 +345,8 @@ a {
 
 .pane-meta {
   margin-left: auto;
-  font: 400 0.68rem/1.4 var(--mono);
-  color: var(--ink-faint);
+  font: 400 0.75rem/1.4 var(--mono);
+  color: var(--ink-soft);
 }
 
 /* ── terminal ──────────────────────────────────────────────── */
@@ -403,7 +437,7 @@ a {
 
 .hint {
   margin: 0 0 8px;
-  font: 400 0.73rem/1.6 var(--mono);
+  font: 400 0.75rem/1.6 var(--mono);
   color: var(--ink-faint);
 }
 
@@ -490,7 +524,7 @@ a {
 }
 
 .work-tab {
-  font: 400 0.74rem/1 var(--mono);
+  font: 400 0.75rem/1 var(--mono);
   color: var(--ink-soft);
   border: 1px solid var(--line);
   border-radius: 100px;
@@ -519,7 +553,7 @@ a {
   gap: 10px;
   flex-wrap: wrap;
   margin: 0 0 10px;
-  font: 400 0.68rem/1.4 var(--mono);
+  font: 400 0.75rem/1.4 var(--mono);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-faint);
@@ -545,7 +579,7 @@ a {
   align-items: baseline;
   gap: 9px;
   margin: 0 0 10px;
-  font: 400 0.72rem/1.5 var(--mono);
+  font: 400 0.75rem/1.5 var(--mono);
   color: var(--ink-soft);
 }
 
@@ -611,7 +645,7 @@ a {
 
 .destination-note {
   margin: 10px 0 0;
-  font: 400 0.72rem/1.6 var(--mono);
+  font: 400 0.75rem/1.6 var(--mono);
   color: var(--ink-faint);
 }
 
@@ -627,7 +661,7 @@ a {
   background: var(--surface);
   border: 1px solid var(--line-soft);
   border-radius: var(--radius);
-  font: 400 0.7rem/1.4 var(--mono);
+  font: 400 0.75rem/1.4 var(--mono);
   color: var(--ink-faint);
 }
 
@@ -753,7 +787,7 @@ a {
 @media (max-width: 620px) {
   .session,
   .prompt {
-    font-size: 0.74rem;
+    font-size: 0.8rem;
   }
 
   .listing {
