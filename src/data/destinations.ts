@@ -41,20 +41,20 @@ export const destinations = [
   },
   {
     slug: "itinerary-control",
-    title: "Itinerary Change Control",
-    shortTitle: "Itinerary Control",
+    title: "Trip Proposal Change Control",
+    shortTitle: "Proposal Control",
     kind: "case-study",
     href: "/work/itinerary-control",
     summary:
-      "A packet-first workflow for absorbing late group-travel changes without rebuilding every document by hand.",
-    status: "Design approved; first build in progress",
+      "A tool for a student travel company that turns a trip record into its printed Word proposal, then turns a director's revision into the reprinted proposal and a paper trail of what changed.",
+    status: "Shipped, 2026",
     evidence: [
-      "Models an itinerary revision as structured changes and downstream impacts.",
-      "Produces reviewable Word and PDF packets before any broader workflow automation.",
-      "Keeps an employee approval gate between generated output and operational use.",
+      "Renders a trip record into the client's own printed layout: cover, day-by-day schedule, inclusions and exclusions, and a price table.",
+      "One command takes a director's revised trip and produces the revised proposal, a change summary that separates material changes (venues, times, prices, inclusions) from wording-only edits, and an internal vendor call list.",
+      "Builds are byte-identical run to run; 239 tests cover the proposal, the revision command, and the change classification; real client data never enters git.",
     ],
     learning:
-      "The useful first step is not automating every reservation; it is making one changed plan legible before work is repeated.",
+      "Reading and writing the same trip record everywhere meant a fact fixed once showed up correctly in the proposal, the change summary, and the vendor list, instead of needing to be retyped into a second source for the Word document.",
     verified: true,
   },
   {
@@ -112,6 +112,24 @@ export const destinations = [
     learning:
       "Separating the rules engine from the interface let the same game logic drive both play and the interactive tutorials, instead of duplicating rules in each.",
     verified: false,
+  },
+  {
+    slug: "tracker-digest",
+    title: "tracker-digest — Job-Application Follow-up Digest",
+    shortTitle: "tracker-digest",
+    kind: "case-study",
+    href: "/work/tracker-digest",
+    summary:
+      "A Python command-line tool, standard library only, that reads a job-application tracker CSV, finds applications with no reply for seven or more days, and drafts a digest of them.",
+    status: "Complete, 2026",
+    evidence: [
+      "Keeps the rule for what counts as gone quiet in one function, with 20 tests pinning the behavior.",
+      "Reports rows with unreadable or missing dates under a Needs fixing section with their CSV line numbers, instead of dropping them.",
+      "Puts a human review step before any output leaves the program, recording every approve or reject decision in an append-only audit log.",
+    ],
+    learning:
+      "A deliberate edge-case pass found that a blank line in the CSV shifted the reported line number for a bad row, because the code assumed row index plus two instead of asking the CSV reader for its own line count. A test that failed on the old code and passed on the fix pinned the correction.",
+    verified: true,
   },
   {
     slug: "resume",
