@@ -61,7 +61,7 @@ export const destinations = [
     evidence: [
       "Renders a trip record into the client's own printed layout: cover, day-by-day schedule, inclusions and exclusions, and a price table.",
       "One command takes a director's revised trip and produces the revised proposal, a change summary that separates material changes (venues, times, prices, inclusions) from wording-only edits, and an internal vendor call list.",
-      "Builds are byte-identical run to run; 239 tests cover the proposal, the revision command, and the change classification; real client data never enters git.",
+      "Builds are byte-identical run to run; 242 tests cover the proposal, the revision command, and the change classification; real client data never enters git.",
       "Each revision also runs a consistency check on the trip data, catching problems like two stops booked at the same time or a supplier named differently in two places, before anything reaches the client.",
     ],
     learning:
@@ -69,7 +69,7 @@ export const destinations = [
     verified: true,
     primary: true,
     category: "Tool",
-    tags: ["Word output", "239 tests"],
+    tags: ["Word output", "242 tests"],
   },
   {
     slug: "tracker-digest",
