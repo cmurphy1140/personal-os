@@ -85,7 +85,7 @@ site without learning the terminal. Commands remain fully available below it.
 ## Content Shape
 
 - `~/profile`: concise introduction, working style, and current focus.
-- `~/experience`: verified resume history.
+- `~/experience`: verified resume history; drawn to scale at `/timeline`.
 - `~/work`: project manifests and public case studies.
 - `~/learning`: corrections, constraints, and what each project taught Connor.
 - `~/resume.pdf`: approved downloadable resume.

@@ -48,7 +48,7 @@ function WorkPane({ selected, execute }: { selected: Destination; execute: (comm
   const destinationLabel = selected.href.startsWith("https://github.com/")
     ? "Open repository"
     : selected.kind === "artifact"
-      ? "Open resume"
+      ? `Open ${selected.shortTitle.toLowerCase()}`
       : "Open case study";
   return (
     <section className="pane pane--work" aria-labelledby="selected-work-title">
@@ -154,7 +154,7 @@ export default function PersonalOS() {
       <a className="skip-link" href="#selected-work-title">Skip to selected work</a>
       <header className="app-bar">
         <Link className="brand" href="/"><span className="eyebrow">CONNOR MURPHY</span><span className="brand-title">PERSONAL OS</span></Link>
-        <div className="bar-actions"><Link className="chip" href="/resume">resume</Link><ThemeToggle /></div>
+        <div className="bar-actions"><Link className="chip" href="/timeline">timeline</Link><Link className="chip" href="/resume">resume</Link><ThemeToggle /></div>
       </header>
       <main className="planes">
         <WorkPane selected={selected} execute={execute} />

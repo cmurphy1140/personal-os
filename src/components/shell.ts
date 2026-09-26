@@ -11,6 +11,7 @@
    here describes a filesystem that exists. */
 
 import { destinations, type Destination } from "@/data/destinations";
+import { formatRange, timeline, TIMELINE_AS_OF, formatDate } from "@/data/timeline";
 
 export const COMMANDS = [
   "help",
@@ -87,11 +88,13 @@ const tree: Record<string, Directory> = {
   "~/learning": { dirs: [], files: manifest.map((entry) => entry.slug) },
 };
 
+/* Destinations whose terminal document is a home file of another name. */
+const HOME_DOCUMENT: Record<string, string> = { timeline: "experience" };
+
 /** Where `cat` reads a destination from, and what a click on its tab runs. */
 export function viewCommand(destination: Destination) {
-  return destination.kind === "case-study"
-    ? `cat ~/work/${destination.slug}`
-    : `cat ~/${destination.slug}`;
+  if (destination.kind === "case-study") return `cat ~/work/${destination.slug}`;
+  return `cat ~/${HOME_DOCUMENT[destination.slug] ?? destination.slug}`;
 }
 
 export function destinationFor(slug: string) {
@@ -151,19 +154,23 @@ const PROFILE: OutputLine[] = [
   },
   {
     kind: "hint",
-    text: "Biography and employment history are not published here yet: `cat experience`.",
+    text: "Dated work, projects and education: `cat experience`, or `open timeline` for the drawn version.",
   },
 ];
 
+/* The same record /timeline draws, newest first, as the resume dates it. */
 const EXPERIENCE: OutputLine[] = [
-  { kind: "out", text: "experience: not published yet", tone: "warn" },
+  { kind: "out", text: "experience — dated from the verified resume", title: true },
   {
-    kind: "prose",
-    text: "The resume destination is recorded as “Web version available; PDF pending publication review”. The web version is real and reachable — run `resume`.",
+    kind: "out",
+    text: [...timeline]
+      .reverse()
+      .map((entry) => `  ${formatRange(entry)}\n    ${entry.title}\n    ${entry.org}`)
+      .join("\n\n"),
   },
   {
-    kind: "prose",
-    text: "History is added here only after the underlying work has a verified public destination. Nothing is listed on the strength of a description alone.",
+    kind: "hint",
+    text: `as of ${formatDate(TIMELINE_AS_OF)}. \`open timeline\` draws it on one axis.`,
   },
 ];
 
@@ -333,6 +340,7 @@ function catFile(result: ShellResult, arg: string | undefined) {
       return result;
     }
     if (found.name === "experience") {
+      result.select = "timeline";
       result.lines.push(...EXPERIENCE);
       return result;
     }
