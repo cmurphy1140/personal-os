@@ -17,8 +17,8 @@ async function checkViewport(name, viewport) {
   assert.equal(dimensions.scrollWidth, dimensions.innerWidth, `${name}: horizontal overflow`);
   await page.screenshot({ path: `/tmp/personal-os-${name}.png`, fullPage: true });
 
-  await page.getByRole("button", { name: "Itinerary Control" }).click();
-  await page.getByRole("heading", { name: "Itinerary Change Control" }).waitFor();
+  await page.getByRole("button", { name: "Proposal Control" }).click();
+  await page.getByRole("heading", { name: "Trip Proposal Change Control" }).waitFor();
   await page.getByLabel("Portfolio command").fill("sudo whoami");
   await page.getByLabel("Portfolio command").press("Enter");
   await page.getByText("command not found", { exact: false }).waitFor();
