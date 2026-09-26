@@ -160,6 +160,7 @@ export const destinations = [
     learning:
       "Drawing the record to scale meant keeping each date exactly as precise as its source. Widening an entry to look tidier would be a claim the resume does not make.",
     verified: true,
+    primary: true,
   },
   {
     slug: "resume",
