@@ -52,6 +52,7 @@ export const destinations = [
       "Renders a trip record into the client's own printed layout: cover, day-by-day schedule, inclusions and exclusions, and a price table.",
       "One command takes a director's revised trip and produces the revised proposal, a change summary that separates material changes (venues, times, prices, inclusions) from wording-only edits, and an internal vendor call list.",
       "Builds are byte-identical run to run; 239 tests cover the proposal, the revision command, and the change classification; real client data never enters git.",
+      "Each revision also runs a consistency check on the trip data, catching problems like two stops booked at the same time or a supplier named differently in two places, before anything reaches the client.",
     ],
     learning:
       "Reading and writing the same trip record everywhere meant a fact fixed once showed up correctly in the proposal, the change summary, and the vendor list, instead of needing to be retyped into a second source for the Word document.",
