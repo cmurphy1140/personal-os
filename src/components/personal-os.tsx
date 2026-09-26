@@ -57,7 +57,7 @@ function WorkPane({ selected, execute }: { selected: Destination; execute: (comm
         <span className="pane-meta">{selected.status}</span>
       </header>
       <nav className="work-picker" aria-label="Portfolio destinations">
-        {destinations.map((destination) => (
+        {destinations.filter((destination) => destination.primary).map((destination) => (
           <button className="work-tab" type="button" aria-pressed={destination.slug === selected.slug} key={destination.slug} onClick={() => execute(viewCommand(destination))}>
             {destination.shortTitle}
           </button>
@@ -156,6 +156,12 @@ export default function PersonalOS() {
         <Link className="brand" href="/"><span className="eyebrow">CONNOR MURPHY</span><span className="brand-title">PERSONAL OS</span></Link>
         <div className="bar-actions"><Link className="chip" href="/timeline">timeline</Link><Link className="chip" href="/resume">resume</Link><ThemeToggle /></div>
       </header>
+      <section className="identity" aria-label="About Connor Murphy">
+        <p className="identity-kicker">Connor Murphy · Software Engineer</p>
+        <p className="identity-heading">B.S. Computer Science, University of New Hampshire</p>
+        <p className="identity-line">Targeting entry-level software engineering and IT support roles. Ships backend pipelines and databases; developing an iOS app.</p>
+        <Link className="chip identity-actions" href="/resume">résumé</Link>
+      </section>
       <main className="planes">
         <WorkPane selected={selected} execute={execute} />
         <section className="pane pane--terminal" aria-labelledby="terminal-title">

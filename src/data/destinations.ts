@@ -18,6 +18,9 @@ export type Destination = {
   evidence: readonly string[];
   learning: string;
   verified: boolean;
+  /* Shown in the work-picker tab row. false keeps a destination reachable
+     through ls/cat/open without competing for the first tabs a visitor sees. */
+  primary: boolean;
 };
 
 export const destinations = [
@@ -38,6 +41,7 @@ export const destinations = [
     learning:
       "A measuring tool is part of the evidence chain: subtle instrumentation errors create confident but incorrect conclusions.",
     verified: true,
+    primary: true,
   },
   {
     slug: "itinerary-control",
@@ -57,6 +61,26 @@ export const destinations = [
     learning:
       "Reading and writing the same trip record everywhere meant a fact fixed once showed up correctly in the proposal, the change summary, and the vendor list, instead of needing to be retyped into a second source for the Word document.",
     verified: true,
+    primary: true,
+  },
+  {
+    slug: "tracker-digest",
+    title: "tracker-digest — Job-Application Follow-up Digest",
+    shortTitle: "tracker-digest",
+    kind: "case-study",
+    href: "/work/tracker-digest",
+    summary:
+      "A Python command-line tool, standard library only, that reads a job-application tracker CSV, finds applications with no reply for seven or more days, and drafts a digest of them.",
+    status: "Complete, 2026",
+    evidence: [
+      "Keeps the rule for what counts as gone quiet in one function, with 20 tests pinning the behavior.",
+      "Reports rows with unreadable or missing dates under a Needs fixing section with their CSV line numbers, instead of dropping them.",
+      "Puts a human review step before any output leaves the program, recording every approve or reject decision in an append-only audit log.",
+    ],
+    learning:
+      "A deliberate edge-case pass found that a blank line in the CSV shifted the reported line number for a bad row, because the code assumed row index plus two instead of asking the CSV reader for its own line count. A test that failed on the old code and passed on the fix pinned the correction.",
+    verified: true,
+    primary: true,
   },
   {
     slug: "mac-hardening",
@@ -76,24 +100,7 @@ export const destinations = [
     learning:
       "Cleaning up a machine starts with measuring it: I inventoried every startup item and gigabyte before removing anything, so each change could be explained and undone.",
     verified: true,
-  },
-  {
-    slug: "band-charter-outreach",
-    title: "Customer Outreach Pipeline",
-    shortTitle: "Outreach Pipeline",
-    kind: "case-study",
-    href: "/work/band-charter-outreach",
-    summary:
-      "Built a PostgreSQL lead pipeline for a band travel charter client.",
-    status: "2025",
-    evidence: [
-      "Filtered East Coast schools to traveling band programs, with music-department contacts found through parameter testing.",
-      "Chained queries into soft-lead scoring and templated email generation.",
-      "Built with Python, PostgreSQL, and SQL.",
-    ],
-    learning:
-      "Turning a manual outreach list into a scored, queryable pipeline made it possible to prioritize leads and generate templated contact instead of working the list by hand.",
-    verified: false,
+    primary: true,
   },
   {
     slug: "catch-5",
@@ -113,24 +120,28 @@ export const destinations = [
     learning:
       "Separating the rules engine from the interface let the same game logic drive both play and the interactive tutorials, instead of duplicating rules in each.",
     verified: false,
+    primary: true,
   },
   {
-    slug: "tracker-digest",
-    title: "tracker-digest — Job-Application Follow-up Digest",
-    shortTitle: "tracker-digest",
+    slug: "band-charter-outreach",
+    title: "Customer Outreach Pipeline",
+    shortTitle: "Outreach Pipeline",
     kind: "case-study",
-    href: "/work/tracker-digest",
+    href: "/work/band-charter-outreach",
     summary:
-      "A Python command-line tool, standard library only, that reads a job-application tracker CSV, finds applications with no reply for seven or more days, and drafts a digest of them.",
-    status: "Complete, 2026",
+      "Built a PostgreSQL lead pipeline for a band travel charter client.",
+    status: "2025",
     evidence: [
-      "Keeps the rule for what counts as gone quiet in one function, with 20 tests pinning the behavior.",
-      "Reports rows with unreadable or missing dates under a Needs fixing section with their CSV line numbers, instead of dropping them.",
-      "Puts a human review step before any output leaves the program, recording every approve or reject decision in an append-only audit log.",
+      "Filtered East Coast schools to traveling band programs, with music-department contacts found through parameter testing.",
+      "Chained queries into soft-lead scoring and templated email generation.",
+      "Built with Python, PostgreSQL, and SQL.",
     ],
     learning:
-      "A deliberate edge-case pass found that a blank line in the CSV shifted the reported line number for a bad row, because the code assumed row index plus two instead of asking the CSV reader for its own line count. A test that failed on the old code and passed on the fix pinned the correction.",
-    verified: true,
+      "Turning a manual outreach list into a scored, queryable pipeline made it possible to prioritize leads and generate templated contact instead of working the list by hand.",
+    verified: false,
+    /* Thinnest evidence, no test count, no shipped status: kept reachable via
+       ls/cat/open, not shown in the tab row (docs/home-page-proposal.md). */
+    primary: false,
   },
   {
     slug: "timeline",
@@ -166,6 +177,7 @@ export const destinations = [
     learning:
       "A portfolio is strongest when the resume is an index into evidence rather than a separate set of claims.",
     verified: true,
+    primary: true,
   },
 ] as const satisfies readonly Destination[];
 
