@@ -1,7 +1,8 @@
 /* The dated record behind /timeline and `cat experience`.
 
-   Every entry is copied from the verified one-page resume
-   (public/Connor_Murphy_Resume.pdf). Dates keep the resume's own precision: a
+   Every entry is traced to Connor's résumé facts file (the approved wording
+   behind public/Connor_Murphy_Resume.pdf); anything the facts file does not
+   state is left out. Dates keep the resume's own precision: a
    month when the resume gives a month, a bare year when it gives only a year.
    Nothing is interpolated, so a year-only entry is drawn as the whole year and
    labelled as year precision rather than given an invented month.
@@ -26,7 +27,8 @@ export type TimelineEntry = {
   end?: TimelineDate;
   /** A single dated event, such as a graduation, rather than a span. */
   milestone?: boolean;
-  note: string;
+  /** Only wording the résumé facts file states; omitted when it states none. */
+  note?: string;
   slug?: string;
 };
 
@@ -36,15 +38,15 @@ export const TIMELINE_AS_OF = "2026-09";
 export const TIMELINE_FIRST_YEAR = 2021;
 export const TIMELINE_LAST_YEAR = 2026;
 
-export const timeline = [
+export const timeline: readonly TimelineEntry[] = [
   {
     id: "wibl",
     lane: "projects",
-    title: "WIBL bathymetry pipeline — senior capstone",
-    org: "University of New Hampshire",
+    title: "Wireless Inexpensive Bathymetry Logger (WIBL) — senior capstone",
+    org: "University of New Hampshire, CS 791/792",
     start: "2021",
     end: "2022",
-    note: "Redesigned AWS bathymetry processing with Lambda, Step Functions, S3 and the Serverless Framework.",
+    note: "Redesigned an AWS serverless data-processing pipeline using Lambda, Step Functions, S3 and the Serverless Framework.",
   },
   {
     id: "liberty-mutual",
@@ -53,7 +55,7 @@ export const timeline = [
     org: "Liberty Mutual",
     start: "2022-05",
     end: "2022-08",
-    note: "Java on AWS Lambda for a telematics scoring pipeline; offered a full-time TechStart software engineer position.",
+    note: "Developed Java backend components on AWS Lambda for a telematics scoring pipeline; offered the TechStart full-time software engineer program.",
   },
   {
     id: "unh",
@@ -62,44 +64,41 @@ export const timeline = [
     org: "University of New Hampshire",
     start: "2023-05",
     milestone: true,
-    note: "Graduated, Durham, NH.",
+    note: "Degree conferred May 2023.",
   },
   {
     id: "birches",
     lane: "work",
-    title: "Lead substitute teacher — PE and health",
-    org: "Birches Academy of Academics and Arts",
+    title: "Birches Academy",
+    org: "Salem, NH",
     start: "2024-09",
     end: "2025-10",
-    note: "Planned and delivered K–8 lessons; reported progress to parents and administrators in plain language.",
   },
   {
     id: "post-and-vine",
     lane: "work",
-    title: "Server, bartender and catering orchestrator",
-    org: "Post & Vine",
+    title: "Post & Vine",
+    org: "Vero Beach, FL",
     start: "2025-11",
     end: "2026-04",
-    note: "High-volume, client-facing service.",
   },
   {
     id: "sandridge",
     lane: "work",
-    title: "Golf course operations",
-    org: "Sandridge Golf Club, Indian River County",
+    title: "Sandridge Golf Club",
+    org: "Indian River County",
     start: "2026-04",
-    note: "Daily operations at a county-owned 36-hole facility, including zero-variance cash reconciliation.",
   },
   {
     id: "vero",
     lane: "projects",
-    title: "Vero — system assurance field study",
+    title: "Cyber-Physical System Assurance — home automation field study",
     org: "Independent",
     start: "2026",
-    note: "Reverse-engineered a home automation system's local interfaces; 182-test safety suite.",
+    note: "Reverse-engineered a professionally installed home automation system's local interfaces; built a 182-test Swift suite.",
     slug: "vero",
   },
-] as const satisfies readonly TimelineEntry[];
+];
 
 /* ── date arithmetic, in fractional years ─────────────────── */
 

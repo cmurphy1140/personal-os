@@ -89,7 +89,7 @@ export default function TimelinePage() {
                           <p className="tl-range">{formatRange(entry)}{isYearPrecision(entry) ? " · year precision" : ""}</p>
                           <p className="tl-title">{href ? <Link href={href}>{entry.title}</Link> : entry.title}</p>
                           <p className="tl-org">{entry.org}</p>
-                          <p className="tl-note">{entry.note}</p>
+                          {entry.note ? <p className="tl-note">{entry.note}</p> : null}
                         </div>
                         <div className="tl-track" style={{ "--now": `${now}%` } as CSSProperties}>
                           <Bar entry={entry} index={timeline.indexOf(entry)} />
