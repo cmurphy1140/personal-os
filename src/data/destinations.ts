@@ -21,6 +21,7 @@ export type Destination = {
   /* Shown in the work-picker tab row. false keeps a destination reachable
      through ls/cat/open without competing for the first tabs a visitor sees. */
   primary: boolean;
+  phase?: "Building" | "Maintaining" | "Complete";
   /* The mile-marker label on the home card: a plain category and the tools
      the entry's own evidence names. Nothing here goes beyond that evidence. */
   category?: string;
@@ -29,6 +30,26 @@ export type Destination = {
 
 export const destinations = [
   {
+    slug: "evidence-room",
+    title: "Evidence Room — A Game About Changing Your Mind",
+    shortTitle: "Evidence Room",
+    kind: "case-study",
+    href: "/work/evidence-room",
+    summary: "An investigation game built around fictional records, supported claims, and the moment new evidence changes the story. My current learning project.",
+    status: "Phase 1 scaffold · learner implementation in progress",
+    phase: "Building",
+    evidence: [
+      "The starter includes fictional records, citation selection, a claim notebook, and a revision flow.",
+      "A learning kit pairs diagrams and short explainers with a deliberately unfinished evidence-validation exercise.",
+      "Persistence, an API, a database, and case authoring are proposed later phases, not shipped features.",
+    ],
+    learning: "Build one understandable rule, follow its effect through the interface, then add the next layer. A working scaffold is the start of the learning, not proof that the exercise is finished.",
+    verified: true,
+    primary: true,
+    category: "Learning game",
+    tags: ["JavaScript", "Evidence", "Learning by building"],
+  },
+  {
     slug: "vero",
     title: "Vero — System Assurance Field Study",
     shortTitle: "Vero",
@@ -36,7 +57,8 @@ export const destinations = [
     href: "/work/vero",
     summary:
       "A safety-bounded reverse-engineering study of a professionally installed home automation system.",
-    status: "Active field study",
+    status: "Ongoing engineering study",
+    phase: "Maintaining",
     evidence: [
       "Built repeatable read-only instrumentation instead of relying on screenshots.",
       "Separated measured behavior, inference, and assumption in the written record.",
@@ -47,7 +69,7 @@ export const destinations = [
     verified: true,
     primary: true,
     category: "Field study",
-    tags: ["Swift", "WebSockets", "182 tests"],
+    tags: ["Swift", "WebSockets", "Instrumentation"],
   },
   {
     slug: "itinerary-control",
@@ -58,6 +80,7 @@ export const destinations = [
     summary:
       "A tool for a student travel company that turns a trip record into its printed Word proposal, then turns a director's revision into the reprinted proposal and a paper trail of what changed.",
     status: "Shipped, 2026",
+    phase: "Maintaining",
     evidence: [
       "Renders a trip record into the client's own printed layout: cover, day-by-day schedule, inclusions and exclusions, and a price table.",
       "One command takes a director's revised trip and produces the revised proposal, a change summary that separates material changes (venues, times, prices, inclusions) from wording-only edits, and an internal vendor call list.",
@@ -80,6 +103,7 @@ export const destinations = [
     summary:
       "A Python command-line tool, standard library only, that reads a job-application tracker CSV, finds applications with no reply for seven or more days, and drafts a digest of them.",
     status: "Complete, 2026",
+    phase: "Complete",
     evidence: [
       "Keeps the rule for what counts as gone quiet in one function, with 20 tests pinning the behavior.",
       "Reports rows with unreadable or missing dates under a Needs fixing section with their CSV line numbers, instead of dropping them.",
@@ -101,6 +125,7 @@ export const destinations = [
     summary:
       "Audited and cleaned a macOS system end to end, then scripted its weekly maintenance.",
     status: "Complete, 2026",
+    phase: "Complete",
     evidence: [
       "Removed 34 orphaned launch items left behind by uninstalled software.",
       "Migrated Homebrew to its native arm64 install.",
@@ -123,6 +148,7 @@ export const destinations = [
     summary:
       "Developing a Swift/SwiftUI app for playing and learning Catch 5, with a standalone rules engine, computer opponents, interactive tutorials, strategy explanations, and save/resume functionality.",
     status: "In development",
+    phase: "Building",
     evidence: [
       "Standalone rules engine separated from the app UI.",
       "Computer opponents for solo play.",

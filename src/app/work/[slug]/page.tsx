@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import SiteHeader from "@/components/site-header";
-import { mileLabel } from "@/components/work-pane";
 import { destinations, findDestination } from "@/data/destinations";
 
 export function generateStaticParams() {
@@ -19,7 +18,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const destination = findDestination(slug);
   if (!destination || destination.kind !== "case-study") notFound();
-  const label = mileLabel(destination.slug) ?? `CASE STUDY · ${destination.status.toUpperCase()}`;
+  const label = "category" in destination ? destination.category : "Case study";
   return (
     <div className="frame">
       <SiteHeader />

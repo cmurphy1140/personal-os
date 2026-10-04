@@ -24,7 +24,12 @@ async function filesUnder(root) {
   return files;
 }
 
-const files = (await Promise.all(roots.map(filesUnder))).flat();
+// Server JavaScript and client-reference manifests contain compiler filesystem
+// metadata and are never served. Scan every client asset plus prerendered HTML,
+// RSC payloads and route bodies; do not mistake build metadata for public output.
+const files = (await Promise.all(roots.map(filesUnder))).flat().filter(file =>
+  file.startsWith(".next/static/") || !/\.(?:js|map)$/.test(file)
+);
 const findings = [];
 
 for (const file of files) {

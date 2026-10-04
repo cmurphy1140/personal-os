@@ -8,7 +8,7 @@ const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
 export const metadata: Metadata = {
   title: "Connor Murphy — Software Engineer",
   description:
-    "Connor Murphy: B.S. Computer Science, University of New Hampshire. Projects, a dated record of the road so far, and the résumé.",
+    "Connor Murphy: B.S. Computer Science, University of New Hampshire. A living journal of software, systems, and learning by building. Explore current projects, case studies, and the résumé.",
 };
 
 const themeScript = `try{const t=localStorage.getItem("personal-os-theme");if(t)document.documentElement.dataset.theme=t}catch{}`;

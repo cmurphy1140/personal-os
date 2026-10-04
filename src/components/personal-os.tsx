@@ -7,6 +7,7 @@ import { boot, completions, run, verifiedCount } from "@/components/shell";
 import Road from "@/components/road";
 import SiteHeader from "@/components/site-header";
 import TerminalPanel, { type TranscriptBlock } from "@/components/terminal-panel";
+import LivingFocus from "@/components/living-focus";
 import WorkPane from "@/components/work-pane";
 
 /* The one controller. Card taps, listing taps and typed commands all go
@@ -46,7 +47,7 @@ export default function PersonalOS() {
   };
 
   useEffect(() => {
-    sessionRef.current?.scrollTo({ top: sessionRef.current.scrollHeight, behavior: "smooth" });
+    sessionRef.current?.scrollTo({ top: sessionRef.current.scrollHeight, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
   }, [blocks]);
 
   useEffect(() => {
@@ -95,24 +96,15 @@ export default function PersonalOS() {
       <a className="skip-link" href="#work">Skip to selected work</a>
       <SiteHeader onTerminal={openTerminal} terminalOpen={terminalOpen} />
       <main>
-        <section className="hero" aria-labelledby="hero-title">
-          <p className="section-kicker">Software engineer · B.S. Computer Science</p>
-          <h1 className="hero-name" id="hero-title">Connor Murphy</h1>
-          <p className="hero-bio">
-            A computer science graduate of the <strong>University of New Hampshire</strong>, looking for{" "}
-            <strong>entry-level software engineering</strong> and <strong>IT support</strong> roles. I build backend
-            pipelines and databases: a <strong>home automation field study</strong>, a <strong>trip proposal tool</strong>,
-            a <strong>job-application digest</strong>, and an <strong>iOS card game</strong> still in development.
-          </p>
-          <blockquote className="hero-line">
-            <p>I walk a different road, and it&rsquo;s the only road I want to be on.</p>
-          </blockquote>
-          <div className="hero-actions">
-            <a className="button button--primary" href="/Connor_Murphy_Resume.pdf" download>Download résumé</a>
-            <a className="button" href="#work">See the work</a>
+        <section className="living-hero" aria-labelledby="hero-title">
+          <div className="hero-context"><span>Software engineer. Always a student.</span><time dateTime="2026-10-04">Updated October 4, 2026</time></div>
+          <h1 id="hero-title">Connor<br />Murphy<span aria-hidden="true">.</span></h1>
+          <div className="hero-bottom">
+            <p>I build things to understand them.<br />Then I follow the next question.</p>
+            <div className="hero-intro"><p>Computer science graduate from the University of New Hampshire. Exploring software, systems, and the space between an idea and something that works.</p><div className="hero-actions"><a className="button button--primary" href="#work">Explore the work</a><a className="button" href="/Connor_Murphy_Resume.pdf" download>Download résumé</a></div></div>
           </div>
         </section>
-        <hr className="centre-line" />
+        <LivingFocus />
         <WorkPane execute={execute} />
         <hr className="centre-line" />
         <Road />

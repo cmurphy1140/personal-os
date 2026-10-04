@@ -23,29 +23,20 @@ case study. Arbitrary commands, paths, and URLs must fail closed.
 
 ## Aesthetic North Star
 
-"A Different Road", built on Connor's line: "I walk a different road, and it's
-the only road I want to be on." A recruiter should know who Connor is and see
-his best work within five seconds; the terminal is there for anyone who wants
-it, not in the way of anyone who doesn't.
+The living project journal (October 2026) evolves “A Different Road.” Connor's
+name and current direction come first. Keep the asphalt/amber palette, Geist
+Sans narrative, Geist Mono controls, light/dark themes, and dated road record.
+See `docs/living-journal-design.md` for the design rationale.
 
-- Night road: near-black asphalt ground with a faint grain, and one warm
-  accent (amber `#d9a95c`, darkened in the light theme for contrast) used the
-  way road paint is used. Sage is for success states in the terminal only.
-- One motif, used sparingly: the dashed amber centre line (section dividers,
-  the terminal toggles' focus ring, the road itself). No gradients, fake
-  telemetry or decorative clutter.
-- Home order: the name, the bio as a large muted sentence with the key words
-  bright, Connor's line as the tagline, a résumé button sized to its label;
-  then mile-marker project cards ("MILE 01 · TOOL · PYTHON"); then the road,
-  drawn only from `src/data/timeline.ts` (across on wide screens, down on a
-  phone) and linked to `/timeline`, which draws the same record to scale.
-- Geist Sans for narrative and titles, Geist Mono for labels and the terminal.
-- The terminal lives behind "Jump to ⌘K" and a `>_` button as a modal dialog
-  (a sheet on a phone). Card taps and typed commands run the same router; an
-  unverified project is shown with its state and is not linked.
-- Mobile visitors reach everything by ordinary taps. Respect reduced motion,
-  visible keyboard focus, semantic HTML, light and dark themes, readable line
-  lengths, and no horizontal scroll at 390px.
+- A large name and short introduction lead into the current learning project.
+- An on-demand, silent Remotion story demonstrates evidence and revision.
+  Never autoplay; reduced motion uses static, selectable chapters and a transcript.
+- Project rows expose real status, searchable tools, expandable learning notes,
+  and manifest-backed case studies. Unverified work remains unlinked.
+- The allowlisted terminal is optional, behind Jump to and the keyboard shortcut.
+- State filters describe editorial project status, not live telemetry.
+- Preserve keyboard focus, semantic HTML, ordinary mobile taps, and no horizontal
+  overflow at 390px. Do not copy private project notes or local assets wholesale.
 
 ## Public Boundary
 

@@ -1,62 +1,31 @@
+"use client";
 import Link from "next/link";
-import type { MouseEvent } from "react";
-import { destinations } from "@/data/destinations";
-
-/* The projects as mile markers. A card for a verified destination is a real
-   link, but a plain click runs `open <slug>` through the same command engine
-   the terminal uses; modified clicks (new tab, new window) keep the browser's
-   own behaviour. An unverified destination is shown with its state and is not
-   linked, exactly as `open` refuses it. */
-
-export const projects = destinations.filter((destination) => destination.kind === "case-study" && destination.primary);
-
-/** "MILE 01 · TOOL · PYTHON": the card's position, category and first tool. */
+import { useState, type MouseEvent } from "react";
+import { destinations, type Destination } from "@/data/destinations";
+export const projects: readonly Destination[] = destinations.filter((destination) => destination.kind === "case-study" && destination.primary);
 export function mileLabel(slug: string) {
-  const index = projects.findIndex((project) => project.slug === slug);
-  const project = projects[index];
-  if (!project) return null;
-  const mile = `MILE ${String(index + 1).padStart(2, "0")}`;
-  return [mile, project.category, project.tags?.[0]].filter(Boolean).join(" · ").toUpperCase();
+  const project = projects.find(project => project.slug === slug);
+  return project ? [project.category, project.tags?.[0]].filter(Boolean).join(" / ") : null;
 }
-
+const phases = ["All", "Building", "Maintaining", "Complete"] as const;
 export default function WorkPane({ execute }: { execute: (command: string) => void }) {
+  const [phase, setPhase] = useState<string>("All");
+  const [query, setQuery] = useState("");
+  const shown = projects.filter(project => (phase === "All" || project.phase === phase) && `${project.title} ${project.summary} ${project.tags?.join(" ")}`.toLowerCase().includes(query.toLowerCase().trim()));
   const onOpen = (slug: string) => (event: MouseEvent<HTMLAnchorElement>) => {
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
-    event.preventDefault();
-    execute(`open ${slug}`);
+    event.preventDefault(); execute(`open ${slug}`);
   };
-
-  return (
-    <section className="work" id="work" aria-labelledby="work-title">
-      <div className="section-head">
-        <p className="section-kicker">Projects</p>
-        <h2 className="section-title" id="work-title">Selected work</h2>
-      </div>
-      <ul className="cards">
-        {projects.map((project) => {
-          const label = mileLabel(project.slug);
-          return (
-            <li key={project.slug}>
-              <article className={`card${project.verified ? "" : " card--pending"}`}>
-                <p className="card-label">
-                  <span>{label}</span>
-                  {project.verified ? null : <span className="badge">{project.status}</span>}
-                </p>
-                <h3 className="card-title">
-                  {project.verified ? (
-                    <Link className="card-link" href={project.href} onClick={onOpen(project.slug)}>{project.title}</Link>
-                  ) : project.title}
-                </h3>
-                <p className="card-summary">{project.summary}</p>
-                <ul className="tags" aria-label="Tools">
-                  {project.tags?.map((tag) => <li key={tag}>{tag}</li>)}
-                </ul>
-                {project.verified ? <span className="card-arrow" aria-hidden="true">→</span> : null}
-              </article>
-            </li>
-          );
-        })}
-      </ul>
-    </section>
-  );
+  return <section className="work journal-work" id="work" aria-labelledby="work-title">
+    <div className="work-intro"><h2 id="work-title">A few things<br />I’m working through.</h2><p>Some shipped. Some still taking shape.<br />Each one leaves me with a better question.</p></div>
+    <div className="work-controls"><div className="phase-filters" aria-label="Filter projects by state">{phases.map(item => <button key={item} aria-pressed={phase === item} onClick={() => setPhase(item)}>{item}</button>)}</div><label className="project-search"><span className="sr-only">Search projects</span><input type="search" placeholder="Find a project or tool" value={query} onChange={event => setQuery(event.target.value)} /></label></div>
+    <p className="result-count" role="status">{shown.length} {shown.length === 1 ? "project" : "projects"}{phase !== "All" ? ` / ${phase.toLowerCase()}` : " / all stages"}</p>
+    <ul className="project-index">{shown.map(project => <li key={project.slug}><article className="project-row">
+      <div className="project-meta"><span className="project-phase">{project.phase}</span><span>{project.category}</span></div>
+      <div className="project-body"><h3>{project.verified ? <Link href={project.href} onClick={onOpen(project.slug)}>{project.shortTitle}</Link> : project.shortTitle}</h3><p>{project.summary}</p><p className="project-status">{project.status}</p><ul className="tags" aria-label="Tools">{project.tags?.map(tag => <li key={tag}>{tag}</li>)}</ul>
+      <details className="project-learning"><summary>What I’m learning</summary><p>{project.learning}</p></details></div>
+      <div className="project-action">{project.verified ? <Link href={project.href} onClick={onOpen(project.slug)} aria-label={`Read ${project.shortTitle} case study`}>Read the story <span aria-hidden="true">↗</span></Link> : <span>Case study forthcoming</span>}</div>
+    </article></li>)}</ul>
+    {shown.length === 0 && <div className="empty-projects"><h3>No projects match that combination.</h3><p>Try another word, or return to the full collection.</p><button className="button" onClick={() => { setQuery(""); setPhase("All"); }}>Show all projects</button></div>}
+  </section>;
 }
