@@ -39,10 +39,9 @@ resolve() {
   case "$ref" in
     /*)   printf 'public%s' "$ref" ;;          # Next.js public/ root
     @/*)  printf '%s' "${ref#@/}" ;;           # tsconfig alias -> project root
-    ./*|../*) ( cd "$(dirname "$src")" 2>/dev/null && \
+    *)    ( cd "$(dirname "$src")" 2>/dev/null && \
                 printf '%s' "$(cd "$(dirname "$ref")" 2>/dev/null && pwd)/$(basename "$ref")" ) \
               | sed "s|^$PWD/||" ;;
-    *)    printf '%s' "$ref" ;;
   esac
 }
 
