@@ -57,12 +57,12 @@ export const destinations = [
     href: "/work/interview-gym-coach",
     summary:
       "A local web companion for my private interview-practice repository. A live board shows each practice problem's status from its real tests, and a mock-interview runner times the 45-minute loop from the gym's curriculum. Claude Code agents built it; I designed the gym, set the mission and use the tool.",
-    status: "Working local tool · merging into the gym, 2026",
+    status: "Working local tool · shipped to the gym, October 2026",
     phase: "Building",
     evidence: [
       "Re-runs a problem's tests whenever a file is saved and pushes the new status to the page over server-sent events. The board never shows test code or answers.",
       "The mock-interview runner times the 45-minute loop from the gym's curriculum, with interviewer cues and green/amber/red grading.",
-      "188+ Python tests and 132 headless UI assertions; five independent reviews found about 30 defects, each fixed before the merge.",
+      "203 Python tests and about 130 headless UI assertions; five independent reviews, with every must-fix finding fixed before it shipped.",
       "Authorship, plainly: agents chose, built, reviewed and documented the coach in one day. I directed the work and am the one practising with it.",
     ],
     learning:
@@ -70,7 +70,7 @@ export const destinations = [
     verified: true,
     primary: true,
     category: "Tool",
-    tags: ["Python", "Server-sent events", "188+ tests"],
+    tags: ["Python", "Server-sent events", "203 tests"],
   },
   {
     slug: "vero",
