@@ -38,11 +38,11 @@ async function checkViewport(name, viewport) {
   const work = page.getByRole("region", { name: "A few things I’m working through." });
   await work.getByRole("link", { name: "Evidence Room", exact: true }).waitFor();
   await page.getByRole("button", { name: "Building", exact: true }).click();
-  assert.equal(await work.getByRole("article").count(), 2);
+  assert.equal(await work.getByRole("article").count(), 3);
   await page.getByRole("searchbox", { name: "Search projects" }).fill("x".repeat(300));
   await page.getByText("No projects match that combination.").waitFor();
   await page.getByRole("button", { name: "Show all projects" }).click();
-  assert.equal(await work.getByRole("article").count(), 6);
+  assert.equal(await work.getByRole("article").count(), 7);
   await work.locator("summary").first().click();
   assert.ok(await work.locator("details").first().getAttribute("open") !== null);
   await page.getByRole("button", { name: "Explore how a claim changes" }).click();
@@ -91,7 +91,7 @@ async function checkViewport(name, viewport) {
     await page.waitForURL(`${baseUrl}/work/vero`);
   }
 
-  for (const route of ["/work/evidence-room", "/work/vero", "/work/itinerary-control", "/resume", "/timeline"]) {
+  for (const route of ["/work/evidence-room", "/work/interview-gym-coach", "/work/vero", "/work/itinerary-control", "/resume", "/timeline"]) {
     const response = await page.goto(`${baseUrl}${route}`, { waitUntil: "networkidle" });
     assert.equal(response?.status(), 200, `${route}: expected HTTP 200`);
     const width = await page.evaluate(() => document.documentElement.scrollWidth);

@@ -50,6 +50,29 @@ export const destinations = [
     tags: ["JavaScript", "Evidence", "Learning by building"],
   },
   {
+    slug: "interview-gym-coach",
+    title: "Interview Gym Coach — Live Practice Board and Mock-Interview Runner",
+    shortTitle: "Interview Gym Coach",
+    kind: "case-study",
+    href: "/work/interview-gym-coach",
+    summary:
+      "A local web companion for my private interview-practice repository. A live board shows each practice problem's status from its real tests, and a mock-interview runner times the 45-minute loop from the gym's curriculum. Claude Code agents built it; I designed the gym, set the mission and use the tool.",
+    status: "Working local tool · merging into the gym, 2026",
+    phase: "Building",
+    evidence: [
+      "Re-runs a problem's tests whenever a file is saved and pushes the new status to the page over server-sent events. The board never shows test code or answers.",
+      "The mock-interview runner times the 45-minute loop from the gym's curriculum, with interviewer cues and green/amber/red grading.",
+      "188+ Python tests and 132 headless UI assertions; five independent reviews found about 30 defects, each fixed before the merge.",
+      "Authorship, plainly: agents chose, built, reviewed and documented the coach in one day. I directed the work and am the one practising with it.",
+    ],
+    learning:
+      "Running someone's tests on every save means owning the processes you start: each run gets its own process group and a timeout, so a hung test cannot hold the board. Results are cached by content hash so an unchanged file is not re-run, and the page receives updates over server-sent events instead of polling. Reporting pass counts rather than test names keeps the board from spoiling the exercises it tracks.",
+    verified: true,
+    primary: true,
+    category: "Tool",
+    tags: ["Python", "Server-sent events", "188+ tests"],
+  },
+  {
     slug: "vero",
     title: "Vero — System Assurance Field Study",
     shortTitle: "Vero",

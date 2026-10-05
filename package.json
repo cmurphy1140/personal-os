@@ -7,11 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "node --import ./tests/register.mjs --test \"tests/**/*.test.mts\"",
     "test:ui": "node scripts/verify-ui.mjs",
     "validate:destinations": "node scripts/verify-destinations.mjs",
     "validate:images": "bash scripts/validate-images.sh .",
     "validate:privacy": "node scripts/verify-public-output.mjs",
-    "verify": "npm run validate:destinations && npm run lint && npm run build && npm run validate:privacy && npm run validate:images"
+    "verify": "npm run validate:destinations && npm run lint && npm test && npm run build && npm run validate:privacy && npm run validate:images"
   },
   "dependencies": {
     "@remotion/player": "4.0.532",
