@@ -109,6 +109,18 @@ describe("completions", () => {
     assert.deepEqual(completions("cd w", "~"), ["work/"]);
     assert.deepEqual(completions("cat ve", "~/work"), ["vero"]);
   });
+
+  test("an unknown verb and a stem with no match complete to nothing", () => {
+    assert.deepEqual(completions("sudo x", "~"), []);
+    assert.deepEqual(completions("open zzz", "~"), []);
+    assert.deepEqual(completions("zzz", "~"), []);
+  });
+
+  test("the open pool is de-duplicated", () => {
+    const all = completions("open ", "~");
+    assert.ok(all.length > 0);
+    assert.equal(new Set(all).size, all.length);
+  });
 });
 
 describe("boot", () => {
