@@ -1,5 +1,16 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import { chromium } from "playwright-core";
+import ts from "typescript";
+
+/* Routes come from the destinations manifest, loaded the way
+   verify-destinations.mjs loads it: verified internal hrefs only. */
+const manifestSource = await readFile(new URL("../src/data/destinations.ts", import.meta.url), "utf8");
+const manifestJs = ts.transpileModule(manifestSource, {
+  compilerOptions: { module: ts.ModuleKind.ES2022, target: ts.ScriptTarget.ES2022 },
+}).outputText;
+const { destinations } = await import(`data:text/javascript;base64,${Buffer.from(manifestJs).toString("base64")}`);
+const routes = destinations.filter((entry) => entry.verified && entry.href.startsWith("/")).map((entry) => entry.href);
 
 const baseUrl = process.env.PERSONAL_OS_URL ?? "http://127.0.0.1:4174";
 const browser = await chromium.launch({ headless: true });
@@ -91,7 +102,7 @@ async function checkViewport(name, viewport) {
     await page.waitForURL(`${baseUrl}/work/vero`);
   }
 
-  for (const route of ["/work/evidence-room", "/work/interview-gym-coach", "/work/vero", "/work/itinerary-control", "/resume", "/timeline"]) {
+  for (const route of routes) {
     const response = await page.goto(`${baseUrl}${route}`, { waitUntil: "networkidle" });
     assert.equal(response?.status(), 200, `${route}: expected HTTP 200`);
     const width = await page.evaluate(() => document.documentElement.scrollWidth);

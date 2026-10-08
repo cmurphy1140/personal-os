@@ -10,6 +10,7 @@ it is not connected to a computer or an arbitrary shell.
 - `open vero` resolves to the verified public Vero repository.
 - Vero and Itinerary Change Control have public-safe project views.
 - The resume route and verified one-page PDF include the flagship Vero project.
+- `/timeline` plots every dated entry from the verified resume on one axis.
 - Mobile and desktop layouts, unknown-command failure, internal routes, image
   references, and production privacy tokens are checked locally.
 
