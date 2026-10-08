@@ -30,7 +30,7 @@ Desktop presets on both pages are clean (100 perf, only the same color-contrast 
 
 ## 3. Screenshots
 
-`/private/tmp/claude-501/-Users-connormurphy-Desktop/14648294-88ef-4aca-ae4c-a9591db0a3fb/scratchpad/site-audit/`
+Screenshots were temporary and not kept. Captured:
 - `home-phone.png` (390×844), `home-desktop.png` (1440×900)
 - `tracker-phone.png` (390×844), `tracker-desktop.png` (1440×900)
 
